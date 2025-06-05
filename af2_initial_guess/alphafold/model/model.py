@@ -22,11 +22,12 @@ import ml_collections
 import numpy as np
 import tensorflow.compat.v1 as tf
 import tree
+from timeit import default_timer as timer
 
 from alphafold.common import confidence
 from alphafold.model import features
 from alphafold.model import modules
-
+import os 
 
 def get_confidence_metrics(
     prediction_result: Mapping[str, Any]) -> Mapping[str, Any]:
@@ -52,6 +53,11 @@ class RunModel:
   def __init__(self,
                config: ml_collections.ConfigDict,
                params: Optional[Mapping[str, Mapping[str, np.ndarray]]] = None):
+    # Getting the cache, this should make things faster
+    current_working_dir = os.getcwd()
+    jax_path = os.path.join(current_working_dir, 'jax_cache')
+    jax.config.update("jax_compilation_cache_dir", jax_path)
+    # Normal code starts
     self.config = config
     self.params = params
 

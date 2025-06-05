@@ -190,7 +190,11 @@ class ProteinMPNN_runner():
         mpnn_t0 = time.time()
 
         # Once we have figured out pose I/O without Rosetta this will be easy to swap in
-        pdbfile = 'temp.pdb'
+        tt = 0
+        pdbfile = f'temp{tt}.pdb'
+        while os.path.isfile(pdbfile):
+            tt += 1
+            pdbfile = f'temp{tt}.pdb'
         sample_feats.pose.dump_pdb(pdbfile)
 
         feature_dict = mpnn_util.generate_seqopt_features(pdbfile, sample_feats.chains)
