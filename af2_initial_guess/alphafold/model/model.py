@@ -55,7 +55,7 @@ class RunModel:
                params: Optional[Mapping[str, Mapping[str, np.ndarray]]] = None):
     # Getting the cache, this should make things faster
     current_working_dir = os.getcwd()
-    jax_path = os.path.join(current_working_dir, 'jax_cache')
+    jax_path = os.path.join(current_working_dir, '.jax_cache')
     jax.config.update("jax_compilation_cache_dir", jax_path)
     # Normal code starts
     self.config = config
