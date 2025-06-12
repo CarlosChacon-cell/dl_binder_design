@@ -300,7 +300,7 @@ class ProteinMPNN_runner():
         else:
             self.proteinmpnn(sample_feats)
 
-        seconds = int(time.perf_counter() - t0)
+        seconds = float(time.perf_counter() - t0)
 
         print( f"Struct: {pdb} reported success in {seconds} seconds" )
 
