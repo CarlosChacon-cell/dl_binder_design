@@ -218,7 +218,7 @@ class AF2_runner():
         # If we ever want to write strings to the score file we can do it here
         string_dict = None
 
-        self.struct_manager.record_scores(feat_holder.outtag, score_dict, string_dict, pae, plddt)
+        self.struct_manager.record_scores(feat_holder.outtag, score_dict, string_dict, pae, plddt_array)
 
         print(score_dict)
         print(f"Tag: {feat_holder.outtag} reported success in {time} seconds")
@@ -447,11 +447,8 @@ class StructManager():
 
         pae_json=json.dumps(formatted_output, indent=None, separators=(',', ':'))
 
-        # Save the PAE json.
+        # Save the PAE and pLDDT json.
         json_file_name=f'{self.json_fn}_{model_name}.json' ##NEW##
-
-
-        #pae_json_output_path = f'pae_{model_name}.json'
 
         with open(json_file_name, 'w') as f:
             f.write(pae_json)
