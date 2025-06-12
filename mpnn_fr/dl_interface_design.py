@@ -277,7 +277,7 @@ class ProteinMPNN_runner():
         self.struct_manager.dump_pose(sample_feats.pose, tag)
 
     def run_model(self, tag, args):
-        t0 = time.time()
+        t0 = time.perf_counter()
 
         print(f"Attempting pose: {tag}")
         
@@ -300,7 +300,7 @@ class ProteinMPNN_runner():
         else:
             self.proteinmpnn(sample_feats)
 
-        seconds = int(time.time() - t0)
+        seconds = int(time.perf_counter() - t0)
 
         print( f"Struct: {pdb} reported success in {seconds} seconds" )
 
