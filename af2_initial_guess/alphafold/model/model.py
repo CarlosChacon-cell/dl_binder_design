@@ -54,12 +54,9 @@ class RunModel:
                config: ml_collections.ConfigDict,
                params: Optional[Mapping[str, Mapping[str, np.ndarray]]] = None):
     # Getting the cache, this should make things faster
-    time_start = timer()
     current_working_dir = os.getcwd()
     jax_path = os.path.join(current_working_dir, '.jax_cache')
     jax.config.update("jax_compilation_cache_dir", jax_path)
-    time_end = timer()
-    print('Setting JAX cache took %.2f seconds' % (time_end - time_start))
 
     # Normal code starts
     self.config = config
