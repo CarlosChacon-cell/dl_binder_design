@@ -184,7 +184,7 @@ class ProteinMPNN_runner():
 
         self.FastRelax.apply(sample_feats.pose)
 
-        print(f"Completed one cycle of FastRelax in {int(time.perf_counter()) - relaxT0} seconds")
+        print(f"Completed one cycle of FastRelax in {round(time.perf_counter() - relaxT0,2)} seconds")
 
     def sequence_optimize(self, sample_feats):
         mpnn_t0 = time.perf_counter()
@@ -226,7 +226,7 @@ class ProteinMPNN_runner():
         if self.debug:
             print(f'Generated sequence(s): {sequences}') 
 
-        print( f"ProteinMPNN generated {len(sequences)} sequences in {int( time.perf_counter() - mpnn_t0 )} seconds" ) 
+        print( f"ProteinMPNN generated {len(sequences)} sequences in {round(time.perf_counter() - mpnn_t0,2) } seconds" ) 
 
         return sequences
 
@@ -438,7 +438,7 @@ for pdb in struct_manager.iterate():
         except KeyboardInterrupt: sys.exit( "Script killed by Control+C, exiting" )
 
         except:
-            seconds = int(time.perf_counter() - t0)
+            seconds = round(time.perf_counter() - t0,2)
             print( "Struct with tag %s failed in %i seconds with error: %s"%( pdb, seconds, sys.exc_info()[0] ) )
 
     # We are done with one pdb, record that we finished
