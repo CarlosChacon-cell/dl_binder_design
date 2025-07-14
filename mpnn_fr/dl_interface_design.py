@@ -178,16 +178,16 @@ class ProteinMPNN_runner():
         Run FastRelax on the current pose
         '''
 
-        relaxT0 = time.time()
+        relaxT0 = time.perf_counter()
 
         print('Running FastRelax')
 
         self.FastRelax.apply(sample_feats.pose)
 
-        print(f"Completed one cycle of FastRelax in {int(time.time()) - relaxT0} seconds")
+        print(f"Completed one cycle of FastRelax in {int(time.perf_counter()) - relaxT0} seconds")
 
     def sequence_optimize(self, sample_feats):
-        mpnn_t0 = time.time()
+        mpnn_t0 = time.perf_counter()
 
         # Once we have figured out pose I/O without Rosetta this will be easy to swap in
         tt = 0
@@ -226,7 +226,7 @@ class ProteinMPNN_runner():
         if self.debug:
             print(f'Generated sequence(s): {sequences}') 
 
-        print( f"ProteinMPNN generated {len(sequences)} sequences in {int( time.time() - mpnn_t0 )} seconds" ) 
+        print( f"ProteinMPNN generated {len(sequences)} sequences in {int( time.perf_counter() - mpnn_t0 )} seconds" ) 
 
         return sequences
 
@@ -250,7 +250,7 @@ class ProteinMPNN_runner():
         '''
         Run ProteinMPNN plus FastRelax on the pose being designed
         '''
-        tot_t0 = time.time()
+        tot_t0 = time.perf_counter()
         design_counter = 0
 
         prefix = f"{sample_feats.tag}_dldesign"
@@ -431,14 +431,14 @@ for pdb in struct_manager.iterate():
     if args.debug: proteinmpnn_runner.run_model(pdb, args)
 
     else: # When not in debug mode the script will continue to run even when some poses fail
-        t0 = time.time()
+        t0 = time.perf_counter()
 
         try: proteinmpnn_runner.run_model(pdb, args)
 
         except KeyboardInterrupt: sys.exit( "Script killed by Control+C, exiting" )
 
         except:
-            seconds = int(time.time() - t0)
+            seconds = int(time.perf_counter() - t0)
             print( "Struct with tag %s failed in %i seconds with error: %s"%( pdb, seconds, sys.exc_info()[0] ) )
 
     # We are done with one pdb, record that we finished
