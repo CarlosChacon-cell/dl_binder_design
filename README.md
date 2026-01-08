@@ -31,8 +31,8 @@ This repository provides a copy of Brian Coventry's silent tools, these tools ar
 
 I have split the single conda env that this repo used to use (dl_binder_design.yml; still provided in <base_dir>/include if anyone is interested) into two smaller and easier to install environments. The old environment required PyTorch, JAX, TensorFlow, and PyRosetta packages to all be compatible with one another, which is difficult. The new environments should be easier to install and I have also added import tests so that it is easier and faster to check that the installation has been successful.
 
-Both of these environments require PyRosetta which requires a license that is free to academics and available [here](https://graylab.jhu.edu/pyrosetta/downloads/documentation/PyRosetta_Install_Tutorial.pdf). This license will give you access to the USERNAME and PASSWORD referenced below. If you do not provide this USERNAME and PASSWORD, you will get a CondaHTTPError when you attempt to run the installation.
-
+~Both of these environments require PyRosetta which requires a license that is free to academics and available [here](https://graylab.jhu.edu/pyrosetta/downloads/documentation/PyRosetta_Install_Tutorial.pdf). This license will give you access to the USERNAME and PASSWORD referenced below. If you do not provide this USERNAME and PASSWORD, you will get a CondaHTTPError when you attempt to run the installation.~
+Both of these environments require PyRosetta, but it no longer requires a license to work if you are from academia (in case you are not from academia you should contact the Rosetta Initiative). Just install it using pip and it should work just fine.
 The steps to installing the environments are as follows:
 
 - Ensure that you have the Anaconda or Miniconda package manager
@@ -165,5 +165,7 @@ Where SAMETAG and EXCEPTION can be many different things. What is happening here
 
 If you hit this error, I recommend running the same command that yielded the error but while adding the `-debug` flag to the command. This flag will make the script run without the try-catch block and errors will print with the standard verbose, easier-to-debug messages.
 
+Other people are having trouble with pMPNN not running with the environment detailed here. One solution can be installing the prior environment **dl_binder_design.yml**, which in our case works just fine with pMPNN.
 
+Another possible problem can arise with the different versions of the packages inside **af2_binder_design.yml**. We provide another optional environment which has worked for other people (Shotout to Guille who was the one doing the fix!) which is named **optional_af2_binder_design.yml** 
 
